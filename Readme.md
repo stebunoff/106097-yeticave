@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Николай Стебунов](https://up.htmlacademy.ru/php/5/user/106097).
-* Наставник: `Неизвестно`.
+* Наставник: [Илья Кондрашов](https://htmlacademy.ru/profile/id644427).
 
 ---
 
