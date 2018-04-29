@@ -43,6 +43,16 @@ $ads = [
         'url' => 'img/lot-6.jpg'
     ]
 ];
+
+function format_price ($price) {
+    $rounded_price = ceil($price);
+    if ($rounded_price > 1000) {
+        $rounded_price = number_format ($rounded_price, 0, ",", " ");
+    };
+    $fancy_price = $rounded_price . " ₽";
+    return $fancy_price;
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -131,7 +141,7 @@ $ads = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$item['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=format_price($item['price']); ?></span>
                         </div>
                         <div class="lot__timer timer">
 
