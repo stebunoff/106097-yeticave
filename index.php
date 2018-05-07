@@ -55,7 +55,18 @@ function format_price ($price) {
     return $fancy_price;
 };
 
-$page_content = renderTemplate ('templates/index.php', ['ads' => $ads]);
+function time_to_expire () {
+    date_default_timezone_set('Europe/Moscow');
+    $exp_time = strtotime('tomorrow');
+    $curr_time = strtotime('now');
+    $time_to_exp = $exp_time - $curr_time;
+    return $time_to_exp;
+}
+
+$sec_in_hour = 3600;
+$sec_in_min = 60;
+
+$page_content = renderTemplate ('templates/index.php', ['ads' => $ads, 'sec_in_hour' => $sec_in_hour, 'sec_in_min' => $sec_in_min]);
 $layout_content = renderTemplate ('templates/layout.php', ['content' => $page_content, 'title' => 'YetiCave - Главная', 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
 print($layout_content);
 ?>
