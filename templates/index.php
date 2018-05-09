@@ -41,7 +41,7 @@
                             <span class="lot__cost"><?=htmlspecialchars(format_price($item['price'])); ?></span>
                         </div>
                         <div class="lot__timer timer">
-                            <?=intdiv(time_to_expire(), $template_data['sec_in_hour']) . ':' . intdiv((time_to_expire() % $template_data['sec_in_hour']), $template_data['sec_in_min']); ?>
+                            <?=$time_to_exp; ?>
                         </div>
                     </div>
                 </div>

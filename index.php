@@ -57,16 +57,15 @@ function format_price ($price) {
 
 function time_to_expire () {
     date_default_timezone_set('Europe/Moscow');
+    $sec_in_hour = 3600;
+    $sec_in_min = 60;
     $exp_time = strtotime('tomorrow');
     $curr_time = strtotime('now');
-    $time_to_exp = $exp_time - $curr_time;
+    $time_to_exp = floor(($exp_time - $curr_time)/$sec_in_hour) . ":" . floor(($exp_time - $curr_time) % $sec_in_hour % $sec_in_min);
     return $time_to_exp;
 }
 
-$sec_in_hour = 3600;
-$sec_in_min = 60;
-
-$page_content = renderTemplate ('templates/index.php', ['ads' => $ads, 'sec_in_hour' => $sec_in_hour, 'sec_in_min' => $sec_in_min]);
+$page_content = renderTemplate ('templates/index.php', ['ads' => $ads, 'time_to_exp' => $time_to_exp]);
 $layout_content = renderTemplate ('templates/layout.php', ['content' => $page_content, 'title' => 'YetiCave - Главная', 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
 print($layout_content);
 ?>
