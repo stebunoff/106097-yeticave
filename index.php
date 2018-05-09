@@ -46,16 +46,7 @@ $ads = [
     ]
 ];
 
-function format_price ($price) {
-    $rounded_price = ceil($price);
-    if ($rounded_price > 1000) {
-        $rounded_price = number_format ($rounded_price, 0, ",", " ");
-    };
-    $fancy_price = $rounded_price . " ₽";
-    return $fancy_price;
-};
-
-$page_content = renderTemplate ('templates/index.php', ['ads' => $ads, 'time_to_exp' => $time_to_exp]);
+$page_content = renderTemplate ('templates/index.php', ['ads' => $ads]);
 $layout_content = renderTemplate ('templates/layout.php', ['content' => $page_content, 'title' => 'YetiCave - Главная', 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
 print($layout_content);
 ?>

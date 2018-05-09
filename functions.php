@@ -10,6 +10,15 @@ function renderTemplate ($template_path, $template_data) {
     return $content;
 }
 
+function format_price ($price) {
+    $rounded_price = ceil($price);
+    if ($rounded_price > 1000) {
+        $rounded_price = number_format ($rounded_price, 0, ",", " ");
+    };
+    $fancy_price = $rounded_price . " ₽";
+    return $fancy_price;
+};
+
 function time_to_expire () {
     date_default_timezone_set('Europe/Moscow');
     $sec_in_hour = 3600;
