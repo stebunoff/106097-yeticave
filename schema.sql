@@ -15,20 +15,20 @@ CREATE TABLE lots (
 	start_price INT,
 	expire_date DATE,
 	price_increment INT,
-	author CHAR(128),
-	winner CHAR(128),
-	category CHAR(128)
+	author_id INT,
+	winner_id INT,
+	category_id INT
 );
-CREATE UNIQUE INDEX image on lots(image);
-CREATE INDEX category on lots(category);
-CREATE INDEX title on lots(title);
-CREATE INDEX description on lots(description);
+CREATE UNIQUE INDEX image ON lots(image);
+CREATE INDEX category ON lots(category_id);
+CREATE INDEX title ON lots(title);
+CREATE INDEX description ON lots(description);
 CREATE TABLE bids (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	date DATETIME,
 	bid INT,
-	author CHAR(128),
-	lot INT
+	author_id INT,
+	lot_id INT
 );
 CREATE TABLE users (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,4 +38,4 @@ CREATE TABLE users (
 	name CHAR(128),
 	contacts TEXT
 );
-CREATE UNIQUE INDEX email on users(email);
+CREATE UNIQUE INDEX email ON users(email);
