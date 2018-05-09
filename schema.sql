@@ -17,25 +17,26 @@ CREATE TABLE lots (
 	price_increment INT,
 	author_id INT,
 	winner_id INT,
-	category_id INT
+	category_id INT,
+	UNIQUE KEY image (image),
+	FULLTEXT KEY title_and_description (title, description),
+	KEY category (category_id)
 );
-CREATE UNIQUE INDEX image ON lots(image);
-CREATE INDEX category ON lots(category_id);
-CREATE INDEX title ON lots(title);
-CREATE INDEX description ON lots(description);
 CREATE TABLE bids (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	date DATETIME,
 	bid INT,
 	author_id INT,
-	lot_id INT
+	lot_id INT,
+	KEY author (author_id)
 );
 CREATE TABLE users (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	reg_date DATETIME,
 	email CHAR(150),
-	password CHAR(128),
+	password CHAR(255),
 	name CHAR(128),
-	contacts TEXT
+	contacts VARCHAR(2500),
+	avatar CHAR(255),
+	UNIQUE KEY email (email)
 );
-CREATE UNIQUE INDEX email ON users(email);
