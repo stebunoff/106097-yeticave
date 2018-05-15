@@ -8,12 +8,12 @@ CREATE TABLE categories (
 );
 CREATE TABLE lots (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	creation_date DATE,
+	creation_datetime DATETIME,
 	title CHAR(128),
 	description CHAR(255),
 	image CHAR(255),
 	start_price INT,
-	expire_date DATE,
+	expire_datetime DATETIME,
 	price_increment INT,
 	author_id INT,
 	winner_id INT,
@@ -24,7 +24,7 @@ CREATE TABLE lots (
 );
 CREATE TABLE bids (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	date DATETIME,
+	datetime DATETIME,
 	bid INT,
 	author_id INT,
 	lot_id INT,
@@ -32,7 +32,7 @@ CREATE TABLE bids (
 );
 CREATE TABLE users (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	reg_date DATETIME,
+	reg_datetime DATETIME,
 	email CHAR(150),
 	password CHAR(255),
 	name CHAR(128),
