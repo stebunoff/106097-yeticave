@@ -35,7 +35,7 @@ SELECT * FROM categories;
 -- Получаем новые открытые лоты
 SELECT l.title, l.start_price, l.image, l.category_id, c.category, COUNT(b.id) AS bids_number, l.start_price + l.price_increment * COUNT(b.id) AS price FROM lots l JOIN categories c ON c.id = l.category_id JOIN bids b ON l.id = b.lot_id WHERE l.expire_datetime <= NOW() GROUP BY b.lot_id ORDER BY l.creation_datetime DESC;
 -- Показываем лот по его ID
-SELECT l.* FROM lots l JOIN categories c ON c.id = l.category_id WHERE l.id = 1;
+SELECT l.*, c.category FROM lots l JOIN categories c ON c.id = l.category_id WHERE l.id = 1;
 -- Обновляем название лота по ID
 UPDATE lots SET title = 'Новое название' WHERE id = 2;
 -- Получаем список свежих ставок лота по ID
