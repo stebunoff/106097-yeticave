@@ -1,1 +1,1 @@
-<p><?= $content['error']; ?></p>
+<p><?= $template_data['error']; ?></p>

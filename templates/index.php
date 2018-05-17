@@ -31,7 +31,7 @@
         $num = count($template_data['ads']);
         while ($index < $num) {
             $lots = $template_data['ads'][$index];
-            print('<li class="lots__item lot"><div class="lot__image"><img src="../img/' . htmlspecialchars($lots['image']) . 'width="350" height="260" alt="Сноуборд">
+            print('<li class="lots__item lot"><div class="lot__image"><img src="/img/' . htmlspecialchars($lots['image']) . '" width="350" height="260" alt="Сноуборд">
             </div>
             <div class="lot__info">
                 <span class="lot__category">' . htmlspecialchars($lots['category']) . '</span>
