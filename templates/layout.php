@@ -53,7 +53,7 @@
         $num = count($template_data['categories']);
         while ($index < $num) {
             $cat = $template_data['categories'][$index];
-            print ('<li class="nav__item"><a href="all-lots.html">' . $cat . '</a></li>');
+            print ('<li class="nav__item"><a href="all-lots.html">' . $cat['category'] . '</a></li>');
             $index = $index + 1;
          } ?>
          </ul>
