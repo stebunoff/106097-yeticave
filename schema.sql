@@ -4,7 +4,8 @@ CREATE DATABASE yeticave
 USE yeticave;
 CREATE TABLE categories (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	category CHAR(128)
+	category CHAR(128),
+  class CHAR(128)
 );
 CREATE TABLE lots (
 	id INT AUTO_INCREMENT PRIMARY KEY,
