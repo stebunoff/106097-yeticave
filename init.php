@@ -22,10 +22,8 @@ $sql = 'SELECT id, category, class FROM categories';
 $result = mysqli_query($link, $sql);
 if ($result) {
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-else {
+} else {
     $error = mysqli_error($link);
     $content = renderTemplate('templates/error.php', ['error' => $error]);
     print($content);
 }
-?>

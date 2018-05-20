@@ -1,12 +1,12 @@
   <nav class="nav">
     <ul class="nav__list container">
       <?php $index = 0;
-                $num = count($template_data['categories']);
-                while ($index < $num) {
-                $cat = $template_data['categories'][$index];
-                print ('<li class="nav__item"><a href="all-lots.html">' . $cat['category'] . '</a></li>');
-                $index = $index + 1;
-            }?>
+$num = count($template_data['categories']);
+while ($index < $num) {
+    $cat = $template_data['categories'][$index];
+    print('<li class="nav__item"><a href="all-lots.html">' . htmlspecialchars($cat['category']) . '</a></li>');
+    $index = $index + 1;
+}?>
     </ul>
   </nav>
   <section class="lot-item container">
@@ -14,7 +14,7 @@
     <div class="lot-item__content">
       <div class="lot-item__left">
         <div class="lot-item__image">
-          <img src="img/lot-image.jpg" width="730" height="548" alt="Сноуборд">
+          <img src="img/<?=htmlspecialchars($template_data['lot']['image']);?>" width="730" height="548" alt="<?=htmlspecialchars($template_data['lot']['category']);?>">
         </div>
         <p class="lot-item__category">Категория: <span><?=htmlspecialchars($template_data['lot']['category']);?></span></p>
         <p class="lot-item__description"><?=htmlspecialchars($template_data['lot']['description']);?></p>
@@ -22,7 +22,7 @@
       <div class="lot-item__right">
         <div class="lot-item__state">
           <div class="lot-item__timer timer">
-            10:54:12
+          <?=time_to_expire(strtotime($template_data['lot']['expire_datetime']));?>
           </div>
           <div class="lot-item__cost-state">
             <div class="lot-item__rate">
@@ -44,19 +44,19 @@
         <div class="history">
           <h3>История ставок (<span>10</span>)</h3>
           <table class="history__list">
-            <?php 
-                $num = count($template_data['bids']);
-            if ($num > 0) {
-                $index = 0;
-                $max_bids_to_show = 9;
-                while (($index < $num) or $index == $max_bids_to_show) {
-                    $bid = $template_data['bids'][$index];
-                    print ('<tr class="history__item"><td class="history__name">' . htmlspecialchars($bid['name']) . '</td><td class="history__price">' . htmlspecialchars(format_price($bid['bid'])) . '<td class="history__time">' . human_time_diff(strtotime($bid['datetime'])) . '</td>');
-                    $index = $index + 1;
-                }
-            } else {
-                print('У данного лота пока нет ставок');
-            }?>
+            <?php
+$num = count($template_data['bids']);
+if ($num > 0) {
+    $index = 0;
+    $max_bids_to_show = 9;
+    while (($index < $num) or $index == $max_bids_to_show) {
+        $bid = $template_data['bids'][$index];
+        print('<tr class="history__item"><td class="history__name">' . htmlspecialchars($bid['name']) . '</td><td class="history__price">' . htmlspecialchars(format_price($bid['bid'])) . '<td class="history__time">' . human_time_diff(strtotime($bid['datetime'])) . '</td>');
+        $index = $index + 1;
+    }
+} else {
+    print('У данного лота пока нет ставок');
+}?>
             <tr class="history__item">
               <td class="history__name">Иван</td>
               <td class="history__price">10 999 р</td>
