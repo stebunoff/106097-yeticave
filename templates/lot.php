@@ -48,7 +48,6 @@ while ($index < $num) {
 $num = count($template_data['bids']);
 if ($num > 0) {
     $index = 0;
-    $max_bids_to_show = 9;
     while (($index < $num) or $index == $max_bids_to_show) {
         $bid = $template_data['bids'][$index];
         print('<tr class="history__item"><td class="history__name">' . htmlspecialchars($bid['name']) . '</td><td class="history__price">' . htmlspecialchars(format_price($bid['bid'])) . '<td class="history__time">' . human_time_diff(strtotime($bid['datetime'])) . '</td>');

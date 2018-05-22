@@ -33,12 +33,12 @@ function time_to_expire($exp_time)
     return $time_to_exp;
 }
 
-function getPhrase($number, $titles)
-{
-    $cases = [2, 0, 1, 1, 1, 2];
+// function getPhrase($number, $titles)
+// {
+//     $cases = [2, 0, 1, 1, 1, 2];
 
-    return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
-}
+//     return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
+// }
 
 function human_time_diff($unixtime)
 {$unixtimeAgo = time() - $unixtime;
