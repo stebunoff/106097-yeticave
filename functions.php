@@ -5,7 +5,7 @@ function renderTemplate($template_path, $template_data)
     if (file_exists($template_path)) {
         require_once "$template_path";
     } else {
-        return "";
+        return "Файл $template_path не найден";
     }
     $content = ob_get_clean();
     return $content;
@@ -40,37 +40,53 @@ function getPhrase($number, $titles)
     return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
 }
 
-function human_time_diff($time)
-{
-    $stf = 0;
-    $cur_time = time();
-    $diff = $cur_time - $time;
-
-    $seconds = ['секунда', 'секунды', 'секунд'];
-    $minutes = ['минута', 'минуты', 'минут'];
-    $hours = ['час', 'часа', 'часов'];
-    $days = ['день', 'дня', 'дней'];
-    $weeks = ['неделя', 'недели', 'недель'];
-    $months = ['месяц', 'месяца', 'месяцев'];
-    $years = ['год', 'года', 'лет'];
-    $decades = ['десятилетие', 'десятилетия', 'десятилетий'];
-
-    $phrase = [$seconds, $minutes, $hours, $days, $weeks, $months, $years, $decades];
-    $length = [1, 60, 3600, 86400, 604800, 2630880, 31570560, 315705600];
-
-    for ($i = sizeof($length) - 1; ($i >= 0) && (($no = $diff / $length[$i]) <= 1); $i--) {
-        ;
+function human_time_diff($unixtime)
+{$unixtimeAgo = time() - $unixtime;
+    if ($unixtimeAgo < 60) {
+        return 'меньше минуты назад';
     }
-    if ($i < 0) {
-        $i = 0;
+    $phrases = ['минут', 'часов', 'дней', 'месяцев', 'лет'];
+    $length = [60, 60 * 60, 60 * 60 * 24, 60 * 60 * 24 * 30, 60 * 60 * 24 * 365];
+    for ($i = count($length) - 1; $i >= 0; $i--) {
+        if ($unixtimeAgo / $length[$i] >= 1) {
+            break;
+        }
     }
-    $_time = $cur_time - ($diff % $length[$i]);
-    $no = floor($no);
-    $value = sprintf("%d %s ", $no, getPhrase($no, $phrase[$i]));
-
-    if (($stf == 1) && ($i >= 1) && (($cur_time - $_time) > 0)) {
-        $value .= time_ago($_time);
-    }
-
-    return $value . ' назад';
+    $text = floor($unixtimeAgo / $length[$i]) . ' ' . $phrases[$i] . ' назад';
+    return $text;
 }
+
+// function human_time_diff($time)
+// {
+//     $stf = 0;
+//     $cur_time = time();
+//     $diff = $cur_time - $time;
+
+//     $seconds = ['секунда', 'секунды', 'секунд'];
+//     $minutes = ['минута', 'минуты', 'минут'];
+//     $hours = ['час', 'часа', 'часов'];
+//     $days = ['день', 'дня', 'дней'];
+//     $weeks = ['неделя', 'недели', 'недель'];
+//     $months = ['месяц', 'месяца', 'месяцев'];
+//     $years = ['год', 'года', 'лет'];
+//     $decades = ['десятилетие', 'десятилетия', 'десятилетий'];
+
+//     $phrase = [$seconds, $minutes, $hours, $days, $weeks, $months, $years, $decades];
+//     $length = [1, 60, 3600, 86400, 604800, 2630880, 31570560, 315705600];
+
+//     for ($i = sizeof($length) - 1; ($i >= 0) && (($no = $diff / $length[$i]) <= 1); $i--) {
+//         ;
+//     }
+//     if ($i < 0) {
+//         $i = 0;
+//     }
+//     $_time = $cur_time - ($diff % $length[$i]);
+//     $no = floor($no);
+//     $value = sprintf("%d %s ", $no, getPhrase($no, $phrase[$i]));
+
+//     if (($stf == 1) && ($i >= 1) && (($cur_time - $_time) > 0)) {
+//         $value .= time_ago($_time);
+//     }
+
+//     return $value . ' назад';
+// }

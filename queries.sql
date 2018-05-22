@@ -35,15 +35,15 @@ SET creation_datetime = NOW(), title = '2014 Rossignol District Snowboard', imag
 INSERT INTO bids
 SET datetime = '2018-05-19 23:00:01', bid = 5500, author_id = 2, lot_id = 1;
 INSERT INTO bids
-SET datetime = '2018-06-19 19:00:01', bid = 5600, author_id = 3, lot_id = 1;
+SET datetime = '2018-05-21 19:00:01', bid = 5600, author_id = 3, lot_id = 1;
 INSERT INTO bids
-SET datetime = '2018-06-19 23:00:01', bid = 6000, author_id = 2, lot_id = 1;
+SET datetime = '2018-05-21 23:00:01', bid = 6000, author_id = 2, lot_id = 1;
 INSERT INTO bids
 SET datetime = '2018-05-20 05:55:01', bid = 7700, author_id = 1, lot_id = 2;
 INSERT INTO bids
 SET datetime = '2018-05-21 10:03:11', bid = 7900, author_id = 3, lot_id = 2;
 INSERT INTO bids
-SET datetime = '2018-06-19 23:00:01', bid = 11199, author_id = 1, lot_id = 6;
+SET datetime = '2018-05-19 23:00:01', bid = 11199, author_id = 1, lot_id = 6;
 INSERT INTO bids
 SET datetime = '2018-05-20 05:55:01', bid = 11399, author_id = 3, lot_id = 6;
 INSERT INTO bids
