@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($_POST[$key])) {
             $errors[$key] = 'Это поле надо заполнить';
         }
+        if ($key == ('lot-rate' or 'lot-step') && ctype_digit($_POST[$key])) {
+            $errors[$key] = 'Поле может содержать только цифры';
+        }
     }
 
     if (isset($_FILES['lot-img']['name']) and $_FILES['lot-img']['error'] == UPLOAD_ERR_OK) {
@@ -32,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($res) {
                 $lot_id = mysqli_insert_id($link);
-                header("Location: lot.php?id=" . $lot_id);
+                header("Location: /lot.php?id=" . $lot_id);
             } else {
                 $content = renderTemplate('templates/error.php', ['error' => mysqli_error($link)]);
                 print($content);
