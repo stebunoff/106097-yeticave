@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$template_data['title']; ?></title>
+    <title><?=$template_data['title'];?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
-        <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
+        <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
 
         <nav class="user-menu">
 
@@ -39,23 +39,23 @@
                   <a href="#">Вход</a>
                 </li>
               </ul>
-        <?php endif; ?>    
+        <?php endif;?>
         </nav>
     </div>
 </header>
 
-<main class="container"><?=$template_data['content']; ?></main>
+<main class="container"><?=$template_data['content'];?></main>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
         <?php $index = 0;
-        $num = count($template_data['categories']);
-        while ($index < $num) {
-            $cat = $template_data['categories'][$index];
-            print ('<li class="nav__item"><a href="all-lots.html">' . $cat['category'] . '</a></li>');
-            $index = $index + 1;
-         } ?>
+$num = count($template_data['categories']);
+while ($index < $num) {
+    $cat = $template_data['categories'][$index];
+    print('<li class="nav__item"><a href="all-lots.html">' . htmlspecialchars($cat['category']) . '</a></li>');
+    $index = $index + 1;
+}?>
          </ul>
     </nav>
     <div class="main-footer__bottom container">
