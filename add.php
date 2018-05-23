@@ -4,8 +4,8 @@ require_once 'init.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lot = $_POST;
 
-    $required = ['lot-name', 'lot-rate', 'lot-step', 'lot-date'];
-    $dict = ['lot-name' => 'Наименование лота', 'lot-rate' => 'Начальная цена лота', 'lot-step' => 'Шаг ставки', 'lot-date' => 'Дата завершения торгов', 'file' => 'Изображение'];
+    $required = ['lot-name', 'lot-rate', 'lot-step', 'lot-date', 'category', 'message'];
+    $dict = ['lot-name' => 'Наименование лота', 'lot-rate' => 'Начальная цена лота', 'lot-step' => 'Шаг ставки', 'lot-date' => 'Дата завершения торгов', 'file' => 'Изображение', 'category' => 'Категория', 'message' => 'Описание'];
     $errors = [];
     foreach ($required as $key) {
         if (empty($_POST[$key])) {
@@ -13,6 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         if ($key == ('lot-rate' or 'lot-step') && ctype_digit($_POST[$key])) {
             $errors[$key] = 'Поле может содержать только цифры';
+        }
+        if ($key == 'category' && ctype_digit($_POST[$key])) {
+            $errors[$key] = 'Выберите значение из списка';
         }
     }
 

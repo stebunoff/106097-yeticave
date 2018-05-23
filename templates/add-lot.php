@@ -27,6 +27,7 @@ $lot_date = $_POST['lot-date'] ?? '';
       <div class="form__item">
         <label for="category">Категория</label>
         <select id="category" name="category">
+        <option>Выберите категорию</option>
         <?php $index = 0;
 $num = count($template_data['categories']);
 while ($index < $num) {
@@ -34,18 +35,11 @@ while ($index < $num) {
     print('<option value="' . $cat['id'] . '">' . htmlspecialchars($cat['category']) . '</option>');
     $index = $index + 1;
 }?>
-          <option>Выберите категорию</option>
-          <option>Доски и лыжи</option>
-          <option>Крепления</option>
-          <option>Ботинки</option>
-          <option>Одежда</option>
-          <option>Инструменты</option>
-          <option>Разное</option>
         </select>
         <span class="form__error">Выберите категорию</span>
       </div>
     </div>
-    <div class="form__item form__item--wide">
+    <div class="form__item form__item--wide <?php if (isset($template_data['errors']['message'])): print('form__item--invalid');endif;?>">
       <label for="message">Описание</label>
       <textarea id="message" name="message" placeholder="Напишите описание лота" value="<?=htmlspecialchars($lot_message, ENT_QUOTES);?>"></textarea>
       <span class="form__error">Напишите описание лота</span>
@@ -82,9 +76,9 @@ while ($index < $num) {
         <span class="form__error">Введите дату завершения торгов</span>
       </div>
     </div>
+    <?php if (isset($template_data['errors'])): ?>
     <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
     <ul>
-          <?php if (isset($template_data['errors'])): ?>
           <?php foreach ($template_data['errors'] as $err => $val): ?>
           <li><strong><?=$template_data['dict'][$err];?></strong>: <?=$val;?></li>
 <?php endforeach;?>
