@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "SELECT id FROM users WHERE email = '$email'";
     $res = mysqli_query($link, $sql);
 
-    if (!(filter_var($form['email'], FILTER_VALIDATE_EMAIL))) {
+    if (!empty($form['email']) && !(filter_var($form['email'], FILTER_VALIDATE_EMAIL))) {
         $errors['email'] = 'Укажите корректный e-mail';
     } else if (mysqli_num_rows($res) > 0) {
         $errors['email'] = 'Пользователь с этим email уже зарегистрирован';
