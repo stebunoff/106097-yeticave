@@ -24,32 +24,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $filename = uniqid() . '.jpg';
             $form['path'] = $filename;
-            move_uploaded_file($tmp_name, 'img/' . $filename);
+            move_uploaded_file($tmp_name, 'img/avatars/' . $filename);
         }
     }
     $email = mysqli_real_escape_string($link, $form['email']);
     $sql = "SELECT id FROM users WHERE email = '$email'";
     $res = mysqli_query($link, $sql);
 
-    if (!$res) {
+    if ($res) {
         $content = renderTemplate('templates/error.php', ['error' => mysqli_error($link)]);
         print($content);
     } else if (mysqli_num_rows($res) > 0) {
         $errors[] = 'Пользователь с этим email уже зарегистрирован';
+    } else if (count($errors)) {
+        $page_content = renderTemplate('templates/sign-up.php', ['errors' => $errors, 'dict' => $dict, 'form-class' => 'form--invalid', 'categories' => $categories]);
     } else {
         $password = password_hash($form['password'], PASSWORD_DEFAULT);
 
         $sql = 'INSERT INTO users (reg_datetime, email, name, password, message, avatar) VALUES (NOW(), ?, ?, ?, ?, ?)';
         $stmt = db_get_prepare_stmt($link, $sql, [$form['email'], $form['name'], $password, $form['message'], $form['path']]);
         $res = mysqli_stmt_execute($stmt);
-    }
 
-    if (count($errors)) {
-        $page_content = renderTemplate('templates/sign-up.php', ['errors' => $errors, 'dict' => $dict, 'form-class' => 'form--invalid', 'categories' => $categories]);
-    }
-    if ($res && empty($errors)) {
-        header("Location: /enter.php");
-        exit();
+        if ($res) {
+            header("Location: /enter.php");
+            exit();
+        }
     }
 }
 
@@ -65,3 +64,4 @@ $layout_content = renderTemplate('templates/layout.php', [
 ]);
 
 print($layout_content);
+?>
