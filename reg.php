@@ -27,16 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             move_uploaded_file($tmp_name, 'img/avatars/' . $filename);
         }
     }
+
     $email = mysqli_real_escape_string($link, $form['email']);
     $sql = "SELECT id FROM users WHERE email = '$email'";
     $res = mysqli_query($link, $sql);
 
-    if ($res) {
-        $content = renderTemplate('templates/error.php', ['error' => mysqli_error($link)]);
-        print($content);
-    } else if (mysqli_num_rows($res) > 0) {
-        $errors[] = 'Пользователь с этим email уже зарегистрирован';
-    } else if (count($errors)) {
+    if (mysqli_num_rows($res) > 0) {
+        $errors['email'] = 'Пользователь с этим email уже зарегистрирован';
+    } else if (filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Укажите корректный e-mail';
+    }
+
+    if (count($errors)) {
         $page_content = renderTemplate('templates/sign-up.php', ['errors' => $errors, 'dict' => $dict, 'form-class' => 'form--invalid', 'categories' => $categories]);
     } else {
         $password = password_hash($form['password'], PASSWORD_DEFAULT);
@@ -46,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $res = mysqli_stmt_execute($stmt);
 
         if ($res) {
-            header("Location: /enter.php");
+            header("Location: /login.php");
             exit();
         }
     }
+} else {
+    $page_content = renderTemplate('templates/sign-up.php', ['categories' => $categories, 'form-class' => '']);
 }
-
-$page_content = renderTemplate('templates/sign-up.php', ['categories' => $categories, 'form-class' => '']);
 
 $layout_content = renderTemplate('templates/layout.php', [
     'content' => $page_content,
@@ -64,4 +66,3 @@ $layout_content = renderTemplate('templates/layout.php', [
 ]);
 
 print($layout_content);
-?>
