@@ -57,8 +57,8 @@ $user_message = $_POST['message'] ?? '';
           <?php foreach ($template_data['errors'] as $err => $val): ?>
           <li><strong><?=$template_data['dict'][$err];?></strong>: <?=$val;?></li>
 <?php endforeach;?>
-          <?php endif;?>
     </ul>
+    <?php endif;?>
     <button type="submit" class="button">Зарегистрироваться</button>
     <a class="text-link" href="#">Уже есть аккаунт</a>
   </form>
