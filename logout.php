@@ -1,6 +1,6 @@
 <?php
 
-unset($_SESSION['user']);
-session_destroy();
+unset($_COOKIE['yeticave']);
+setcookie('yeticave', '', time() - 3600, '/');
 header("Location: /index.php");
 exit;

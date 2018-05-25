@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_COOKIE['yeticave'])) {
     http_response_code(403);
     exit;
 }
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $sql = 'INSERT INTO lots (creation_datetime, title, description, image, start_price, expire_datetime, price_increment, author_id, category_id) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?)';
 
-            $stmt = db_get_prepare_stmt($link, $sql, [$lot['lot-name'], $lot['message'], $lot['path'], $lot['lot-rate'], $lot['lot-date'], $lot['lot-step'], $user_id, $lot['category']]);
+            $stmt = db_get_prepare_stmt($link, $sql, [$lot['lot-name'], $lot['message'], $lot['path'], $lot['lot-rate'], $lot['lot-date'], $lot['lot-step'], $_SESSION['user']['id'], $lot['category']]);
             $res = mysqli_stmt_execute($stmt);
 
             if ($res) {

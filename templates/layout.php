@@ -23,11 +23,11 @@
         <nav class="user-menu">
 
         <!-- здесь должен быть PHP код для показа аватара пользователя -->
-        <?php if (isset($_SESSION['user'])): ;?>
-											                <div class="user-menu__image">
-											                    <?php if ($_SESSION['user']['avatar'] !== ''): ?>
-											                <img src="/img/avatars/<?=$_SESSION['user']['avatar'];?>" width="40" height="40" alt="Пользователь">
-											        <?php endif;?>
+        <?php if (isset($_COOKIE['yeticave'])): ;?>
+												                <div class="user-menu__image">
+												                    <?php if ($_SESSION['user']['avatar'] !== ''): ?>
+												                <img src="/img/avatars/<?=$_SESSION['user']['avatar'];?>" width="40" height="40" alt="Пользователь">
+												        <?php endif;?>
               </div>
               <div class="user-menu__logged">
                 <p><?=$_SESSION['user']['name'];?></p>

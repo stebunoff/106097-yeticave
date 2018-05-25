@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!count($errors) and $user) {
         if (password_verify($form['password'], $user['password'])) {
             $_SESSION['user'] = $user;
+            setcookie('yeticave', $user['id'], strtotime('+30 days'), '/');
         } else {
             $errors['password'] = 'Неверный пароль';
         }
