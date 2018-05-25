@@ -38,5 +38,5 @@ if (!isset($_GET['id'])) {
 }
 
 $page_content = renderTemplate('templates/lot.php', ['lot' => $lot_info, 'bids' => $bids_info, 'price' => $price_info, 'categories' => $categories]);
-$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => $lot_info['title'], 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
+$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => $lot_info['title'], 'categories' => $categories]);
 print($layout_content);

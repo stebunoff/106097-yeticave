@@ -20,6 +20,7 @@ while ($index < $num) {
         <p class="lot-item__description"><?=htmlspecialchars($template_data['lot']['description']);?></p>
       </div>
       <div class="lot-item__right">
+          <?php if ($_SESSION['user']): ?>
         <div class="lot-item__state">
           <div class="lot-item__timer timer">
           <?=time_to_expire(strtotime($template_data['lot']['expire_datetime']));?>
@@ -41,6 +42,7 @@ while ($index < $num) {
             <button type="submit" class="button">Сделать ставку</button>
           </form>
         </div>
+          <?php endif;?>
         <div class="history">
           <h3>История ставок (<span>10</span>)</h3>
           <table class="history__list">

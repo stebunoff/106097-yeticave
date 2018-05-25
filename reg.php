@@ -43,7 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $password = password_hash($form['password'], PASSWORD_DEFAULT);
 
-        $sql = 'INSERT INTO users (reg_datetime, email, name, password, message, avatar) VALUES (NOW(), ?, ?, ?, ?, ?)';
+        if (!isset($form['path'])) {
+            $form['path'] = '';
+        }
+        $sql = 'INSERT INTO users (reg_datetime, email, name, password, contacts, avatar) VALUES (NOW(), ?, ?, ?, ?, ?)';
         $stmt = db_get_prepare_stmt($link, $sql, [$form['email'], $form['name'], $password, $form['message'], $form['path']]);
         $res = mysqli_stmt_execute($stmt);
 
@@ -56,13 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = renderTemplate('templates/sign-up.php', ['categories' => $categories, 'form-class' => '']);
 }
 
+$avatar = '';
+if (isset($_SESSION['user'])) {
+    $sql = 'SELECT u.image FROM users u WHERE u.name = ' . $_SESSION['user'];
+    if ($res = mysqli_query($link, $sql)) {
+        $avatar = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    } else {
+        $error = mysqli_error($link);
+        $content = renderTemplate('templates/error.php', ['error' => $error]);
+        print($content);
+    }
+}
+
 $layout_content = renderTemplate('templates/layout.php', [
     'content' => $page_content,
     'categories' => $categories,
     'title' => 'Yeticave | Регистрация',
-    'auth' => $is_auth,
-    'username' => $user_name,
-    'avatar' => $user_avatar,
 ]);
 
 print($layout_content);

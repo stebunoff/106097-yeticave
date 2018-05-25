@@ -23,12 +23,15 @@
         <nav class="user-menu">
 
         <!-- здесь должен быть PHP код для показа аватара пользователя -->
-        <?php if ($template_data['auth']): ?>
-                <div class="user-menu__image">
-                <img src="<?=$template_data['avatar'];?>" width="40" height="40" alt="Пользователь">
+        <?php if (isset($_SESSION['user'])): ;?>
+											                <div class="user-menu__image">
+											                    <?php if ($_SESSION['user']['avatar'] !== ''): ?>
+											                <img src="/img/avatars/<?=$_SESSION['user']['avatar'];?>" width="40" height="40" alt="Пользователь">
+											        <?php endif;?>
               </div>
               <div class="user-menu__logged">
-                <p><?=$template_data['username'];?></p>
+                <p><?=$_SESSION['user']['name'];?></p>
+                <a href="/logout.php">Выход</a>
               </div>
         <?php else: ?>
                 <ul class="user-menu__list">

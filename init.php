@@ -1,6 +1,8 @@
 <?php
 require_once 'functions.php';
 
+session_start();
+
 $db = require_once 'config/db.php';
 $link = mysqli_connect($db['host'], $db['user'], $db['password'], $db['database']);
 if (!$link) {
@@ -12,10 +14,6 @@ if (!$link) {
 mysqli_set_charset($link, "utf8");
 
 $is_auth = (bool) rand(0, 1);
-
-$user_name = 'Константин';
-$user_avatar = 'img/user.jpg';
-$user_id = 1;
 
 $categories = [];
 

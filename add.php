@@ -1,4 +1,10 @@
 <?php
+
+if (!isset($_SESSION['user'])) {
+    http_response_code(403);
+    exit;
+}
+
 require_once 'init.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -57,5 +63,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = renderTemplate('templates/add-lot.php', ['form-class' => '', 'categories' => $categories]);
 }
 
-$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => 'Yeticave - добавление лота', 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
+$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => 'Yeticave - добавление лота', 'categories' => $categories]);
 print($layout_content);

@@ -1,12 +1,11 @@
 <?php
 require_once 'init.php';
 
-session_start();
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $form = $_POST;
 
     $required = ['email', 'password'];
+    $dict = ['email' => 'E-mail', 'password' => 'Пароль'];
     $errors = [];
     foreach ($required as $field) {
         if (empty($form[$field])) {
@@ -24,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $content = renderTemplate('templates/error.php', ['error' => $error]);
         print($content);
     }
-
     if (!count($errors) and $user) {
         if (password_verify($form['password'], $user['password'])) {
             $_SESSION['user'] = $user;
@@ -36,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (count($errors)) {
-        var_dump($errors);
-        $page_content = renderTemplate('templates/login.php', ['form' => $form, 'errors' => $errors, 'categories' => $categories]);
+        $page_content = renderTemplate('templates/login.php', ['form' => $form, 'errors' => $errors, 'dict' => $dict, 'categories' => $categories]);
     } else {
         header("Location: /index.php");
         exit();
     }
+} else {
+    $page_content = renderTemplate('templates/login.php', ['categories' => $categories]);
 }
 
-$page_content = renderTemplate('templates/login.php', ['categories' => $categories]);
-$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => 'Yeticave - Вход', 'auth' => $is_auth, 'username' => $user_name, 'avatar' => $user_avatar, 'categories' => $categories]);
+$layout_content = renderTemplate('templates/layout.php', ['content' => $page_content, 'title' => 'Yeticave - Вход', 'categories' => $categories]);
 print($layout_content);
