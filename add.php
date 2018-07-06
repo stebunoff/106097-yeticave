@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($_POST[$key])) {
             $errors[$key] = 'Это поле надо заполнить';
         }
-        if ($key == ('lot-rate' or 'lot-step') && ctype_digit($_POST[$key])) {
-            $errors[$key] = 'Поле может содержать только цифры';
+        if ($key == ('lot-rate' or 'lot-step') && ctype_digit($_POST[$key]) && ($_POST[$key] > 0)) {
+            $errors[$key] = 'Поле может содержать только цифры больше нуля';
         }
         if ($key == 'category' && ctype_digit($_POST[$key])) {
             $errors[$key] = 'Выберите значение из списка';

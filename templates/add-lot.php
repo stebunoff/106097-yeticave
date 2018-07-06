@@ -82,7 +82,7 @@ while ($index < $num) {
           <?php foreach ($template_data['errors'] as $err => $val): ?>
           <li><strong><?=$template_data['dict'][$err];?></strong>: <?=$val;?></li>
 <?php endforeach;?>
-          <?php endif;?>
     </ul>
+    <?php endif;?>
     <button type="submit" class="button">Добавить лот</button>
   </form>

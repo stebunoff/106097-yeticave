@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "SELECT * FROM users WHERE email = '$email'";
     $res = mysqli_query($link, $sql);
     if ($res = mysqli_query($link, $sql)) {
-        $user = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
+        $user = mysqli_fetch_array($res, MYSQLI_ASSOC);
     } else {
         $error = mysqli_error($link);
         $content = renderTemplate('templates/error.php', ['error' => $error]);

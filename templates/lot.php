@@ -34,13 +34,21 @@ while ($index < $num) {
               Мин. ставка <span><?=htmlspecialchars(format_price($template_data['price']['min_bid']));?></span>
             </div>
           </div>
-          <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
+          <form class="lot-item__form" action="/bid.php?id=<?=$template_data['id'];?>" method="post">
             <p class="lot-item__form-item">
               <label for="cost">Ваша ставка</label>
               <input id="cost" type="number" name="cost" placeholder="12 000">
+              <input class="visually-hidden" name="actual-price" value="<?=htmlspecialchars($template_data['price']['min_bid']);?>">
             </p>
             <button type="submit" class="button">Сделать ставку</button>
           </form>
+          <?php if (isset($template_data['errors'])): ?>
+    <ul>
+          <?php foreach ($template_data['errors'] as $err): ?>
+          <li class="form__error"><strong><?=$template_data['errors'][$err];?></strong></li>
+<?php endforeach;?>
+    </ul>
+    <?php endif;?>
         </div>
           <?php endif;?>
         <div class="history">

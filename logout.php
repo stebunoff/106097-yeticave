@@ -1,6 +1,6 @@
 <?php
+require_once 'init.php';
 
-unset($_COOKIE['yeticave']);
-setcookie('yeticave', '', time() - 3600, '/');
+$_SESSION = [];
 header("Location: /index.php");
 exit;
